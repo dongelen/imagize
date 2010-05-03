@@ -25,10 +25,18 @@ module Imagize
   SHORTENERS = {
     :bitly => {
       :url=> "http://bit.ly/"
+    },
+    :jmp => {
+      :url=> "http://j.mp/"
+    },            
+    :isgd =>{
+      :url=>"http://is.gd/"
     }
+
   }    
   
   IMAGE_URL  = /http:\/\/[.\w]*\/[\/\w]*/
+  # IMAGE_URL  = /http:\/\/[.\w]*\/[\/\w]*[\b.jpg\b|\b\.gif\b|\b\.jp\b|]+/
   JPG_FINDER = /#{IMAGE_URL}.jpg/
   GIF_FINDER = /#{IMAGE_URL}.gif/
   PNG_FINDER = /#{IMAGE_URL}.png/       

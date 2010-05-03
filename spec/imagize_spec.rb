@@ -60,6 +60,7 @@ describe "Imagize" do
     @imagizer.extract_shortener("http://bit.ly/3EgFOY").should == "http://www.nu.nl"
     @imagizer.extract_shortener("http://bit.ly/cxGTkx").should == "http://www.facebook.com/XL1067/posts/116716535027115"    
     @imagizer.extract_shortener("http://j.mp/3EgFOY").should == "http://www.nu.nl"    
+    @imagizer.extract_shortener("http://is.gd/bSCVo").should == "http://www.nu.nl"    
   end
   
   it "should extract find image in shortened url" do
@@ -72,6 +73,8 @@ describe "Imagize" do
     @imagizer.imagize("This is some message http://www.hi.com/1/2/3/x.jpg").size.should ==1    
     @imagizer.imagize("This is some message http://www.hi.com/1/2/3/x.gif").should include "http://www.hi.com/1/2/3/x.gif"
     @imagizer.imagize("This is some message http://bit.ly/bxjNbr but shortened").should include "http://www.hi.com/1/2/3/x.gif"    
+    @imagizer.imagize("This is some message http://bit.ly/bxjNbr but shortened").should include "http://www.hi.com/1/2/3/x.gif"    
+    @imagizer.imagize("This is some message http://is.gd/bSD5l but shortened").should include "http://www.hi.com/1/2/3/x.gif"       
   end                
   
        
