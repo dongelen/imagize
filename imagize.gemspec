@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "imagize.gemspec",
      "lib/imagize.rb",
      "spec/imagize_spec.rb",
      "spec/spec.opts",
