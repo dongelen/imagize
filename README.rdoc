@@ -1,6 +1,6 @@
 = imagize
 
-Description goes here.
+Imagize is a simple library that visualizes tweets. Tweets often contains images in url, imagizers finds these images and returns them. 
 
 == Note on Patches/Pull Requests
  
