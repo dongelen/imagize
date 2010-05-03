@@ -12,7 +12,7 @@ describe "Imagize" do
     urls[0].should ==  "http://twitpic.com/show/large/h5uhc"
     
     urls= @imagizer.imagize("YG family outing y'all!!! http://twitpic.com/h71ip")
-    urls.size.should ==1
+    urls.size.should ==1       
     urls[0].should ==  "http://twitpic.com/show/large/h71ip"
   end                
   
@@ -31,13 +31,11 @@ describe "Imagize" do
     urls= @imagizer.imagize("Hallo bnfgjfdgbfd http://youtu.be/B5IgPI9Dc7A?a\n Fiets")
     urls.should include("http://img.youtube.com/vi/B5IgPI9Dc7A/0.jpg")       
   end    
-
+  
   it "should recognize tweetphoto" do
     urls= @imagizer.imagize("Hallo bnfgjfdgbfd http://tweetphoto.com/16793555 Fiets")
     urls.should include("http://tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/16793555")       
   end  
-  
-  
   
   it "should recognize multiple images" do    
     urls= @imagizer.imagize("MitchBHavin @themdudez http://yfrog.com/16y0 @KarenWuvsYou http://twitpic.com/h5uhc - This is so cool:)! lol")
@@ -45,23 +43,36 @@ describe "Imagize" do
     urls.should include("http://yfrog.com/16y0:iphone")    
     urls.should include"http://twitpic.com/show/large/h5uhc"
   end                 
-  
+      
   it "should recognize shortened youtube urls" do
-    urls= @imagizer.imagize "Long text... youtu.be/1acVM7_rWw4 and more text"
+    urls= @imagizer.imagize "Long text... http://youtu.be/1acVM7_rWw4 and more text"
     urls.size.should == 1
     
     urls[0].should == "http://img.youtube.com/vi/1acVM7_rWw4/0.jpg"
   end                
   
-  it "should create normale urls" do
+  it "should create normal urls" do
     @imagizer.make_url(:twitpic, "hi").should == "http://twitpic.com/show/large/hi"
     @imagizer.make_url(:yfrog, "hi").should == "http://yfrog.com/hi:iphone"
   end                
      
-
-  # it "should recognize jpg" do
-  #   @imagizer.imagize("x.jpg").size.should ==1
-  # end                
+  it "should extract urls of shorteners" do
+    @imagizer.extract_shortener("http://bit.ly/3EgFOY").should == "http://www.nu.nl"
+    @imagizer.extract_shortener("http://bit.ly/cxGTkx").should == "http://www.facebook.com/XL1067/posts/116716535027115"    
+    @imagizer.extract_shortener("http://j.mp/3EgFOY").should == "http://www.nu.nl"    
+  end
+  
+  it "should extract find image in shortened url" do
+    @imagizer.imagize("http://bit.ly/92mRwT").should include("http://twitpic.com/show/large/h5uhc")
+  end
   
   
+  it "should recognize jpg/gif" do
+    @imagizer.imagize("This is some message http://www.hi.com/x.jpg").size.should ==1
+    @imagizer.imagize("This is some message http://www.hi.com/1/2/3/x.jpg").size.should ==1    
+    @imagizer.imagize("This is some message http://www.hi.com/1/2/3/x.gif").should include "http://www.hi.com/1/2/3/x.gif"
+    @imagizer.imagize("This is some message http://bit.ly/bxjNbr but shortened").should include "http://www.hi.com/1/2/3/x.gif"    
+  end                
+  
+       
 end
