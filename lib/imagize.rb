@@ -13,10 +13,14 @@ module Imagize
       :url => "http://yfrog.com/",    
       :convert => "http://yfrog.com/§ID§:iphone"
     },  
-    :youtube => {
+    :youtube_short => {
       :url => "http://youtu.be/",    
       :convert => "http://img.youtube.com/vi/§ID§/0.jpg"      
-    },  
+    },            
+    :youtube_long => {
+      :url => "http://www.youtube.com/watch",
+      :convert => "http://img.youtube.com/vi/§ID§/0.jpg"
+    },
     :tweetphoto => {
       :url => "http://tweetphoto.com/",
       :convert => "http://tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/§ID§"
@@ -47,6 +51,7 @@ module Imagize
   PNG_FINDER = /#{IMAGE_URL}.png/       
   
   IMAGE_FINDERS = [JPG_FINDER, GIF_FINDER, PNG_FINDER]
+  YOUTUBE_LONG_URL="http://www.youtube.com/watch"  
   
   class Imagizer
   
@@ -64,13 +69,19 @@ module Imagize
           
       #find image services
       URL_DEFINITIONS.each do |service, details|   
-        currentService = details[:url]      
-        tweet.scan /#{currentService}\w*/ do |current|        
+        currentService = details[:url]                 
+        tweet.scan /#{currentService}\w*/ do |current| 
           code = current.sub(currentService, "")      
           images <<  make_url (service, code)
         end                 
       end          
            
+      # long youtube                
+      tweet.scan /#{YOUTUBE_LONG_URL}\?v=\w*/ do |current|
+        code = current.sub(YOUTUBE_LONG_URL+"?v=", "")      
+        images <<  make_url (:youtube_long, code)      
+      end   
+      
       IMAGE_FINDERS.each do |finder|
         images += tweet.scan(finder)
       end
