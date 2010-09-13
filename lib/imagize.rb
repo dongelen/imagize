@@ -20,7 +20,12 @@ module Imagize
     :tweetphoto => {
       :url => "http://tweetphoto.com/",
       :convert => "http://tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/§ID§"
+    },
+    :plixi => {
+      :url => "http://plixi.com/p/",
+      :convert => "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://plixi.com/§ID§"
     }
+
   }       
   SHORTENERS = {
     :bitly => {
@@ -61,7 +66,7 @@ module Imagize
       URL_DEFINITIONS.each do |service, details|   
         currentService = details[:url]      
         tweet.scan /#{currentService}\w*/ do |current|        
-          code = current.sub(currentService, "")   
+          code = current.sub(currentService, "")      
           images <<  make_url (service, code)
         end                 
       end          

@@ -36,6 +36,12 @@ describe "Imagize" do
     urls= @imagizer.imagize("Hallo bnfgjfdgbfd http://tweetphoto.com/16793555 Fiets")
     urls.should include("http://tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/16793555")       
   end  
+
+  it "should recognize plixi" do
+    urls= @imagizer.imagize("Hallo bnfgjfdgbfd http://plixi.com/p/44815082 Fiets")
+
+    urls.should include("http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://plixi.com/44815082")       
+  end  
   
   it "should recognize multiple images" do    
     urls= @imagizer.imagize("MitchBHavin @themdudez http://yfrog.com/16y0 @KarenWuvsYou http://twitpic.com/h5uhc - This is so cool:)! lol")
