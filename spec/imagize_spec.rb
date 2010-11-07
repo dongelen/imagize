@@ -76,7 +76,12 @@ describe "Imagize" do
     
     urls[0].should == "http://img.ly/show/full/2oii"
   end         
-  
+  it "should extract moby.to" do
+    urls= @imagizer.imagize "Thats Ma Cock pa...RT @SirKumNflex @kingkong it look like u like #teamuncut u rep it or u just like it? http://moby.to/40p2s4"        
+    urls.size.should == 1
+    
+    urls[0].should == "http://moby.to/40p2s4:full"
+  end  
   it "should create normal urls" do
     @imagizer.make_url(:twitpic, "hi").should == "http://twitpic.com/show/large/hi"
     @imagizer.make_url(:yfrog, "hi").should == "http://yfrog.com/hi:iphone"

@@ -36,9 +36,11 @@ module Imagize
     :imgly =>{
       :url => "http://img.ly/",
       :convert => "http://img.ly/show/full/§ID§"      
-    }
-    
-    
+    },
+    :mobyto => {
+      :url => "http://moby.to/",
+      :convert => "http://moby.to/§ID§:full"      
+    }        
 
   }       
   SHORTENERS = {
