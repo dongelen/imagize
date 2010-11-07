@@ -33,6 +33,10 @@ describe "Imagize" do
     
     urls = @imagizer.imagize("Hallo bnfgjfdgbfd http://www.youtube.com/watch?v=NPahxS10HkY Fiets")
     urls.should include("http://img.youtube.com/vi/NPahxS10HkY/0.jpg")                               
+    
+    urls = @imagizer.imagize("Hallo bnfgjfdgbfd http://www.youtube.com/watch?v=ogZ9WXNNdIc Fiets")
+    urls.should include("http://img.youtube.com/vi/ogZ9WXNNdIc/0.jpg")                               
+    
   end    
   
   it "should recognize tweetphoto" do
@@ -58,7 +62,20 @@ describe "Imagize" do
     urls.size.should == 1
     
     urls[0].should == "http://img.youtube.com/vi/1acVM7_rWw4/0.jpg"
-  end                
+  end       
+  
+  it "should extract twitgoo" do
+    urls= @imagizer.imagize "Komt toch bij mij over als een kippenoep met identiteitscrisis. http://twitgoo.com/1qg60x"        
+    urls.size.should == 1
+    
+    urls[0].should == "http://twitgoo.com/show/img/1qg60x"
+  end         
+  it "should extract img.ly" do
+    urls= @imagizer.imagize "http://img.ly/2oii #porrauol Que falha é essa na página principal...?"        
+    urls.size.should == 1
+    
+    urls[0].should == "http://img.ly/show/full/2oii"
+  end         
   
   it "should create normal urls" do
     @imagizer.make_url(:twitpic, "hi").should == "http://twitpic.com/show/large/hi"
@@ -72,8 +89,8 @@ describe "Imagize" do
     @imagizer.extract_shortener("http://is.gd/bSCVo").should == "http://www.nu.nl"    
   end
   
-  it "should extract find image in shortened url" do
-    @imagizer.imagize("http://bit.ly/92mRwT").should include("http://twitpic.com/show/large/h5uhc")
+  it "should extract  image in shortened url" do
+    @imagizer.imagize("http://bit.ly/92mRwT", true).should include("http://twitpic.com/show/large/h5uhc")
   end
   
   
@@ -81,9 +98,9 @@ describe "Imagize" do
     @imagizer.imagize("This is some message http://www.hi.com/x.jpg").size.should ==1
     @imagizer.imagize("This is some message http://www.hi.com/1/2/3/x.jpg").size.should ==1    
     @imagizer.imagize("This is some message http://www.hi.com/1/2/3/x.gif").should include "http://www.hi.com/1/2/3/x.gif"
-    @imagizer.imagize("This is some message http://bit.ly/bxjNbr but shortened").should include "http://www.hi.com/1/2/3/x.gif"    
-    @imagizer.imagize("This is some message http://bit.ly/bxjNbr but shortened").should include "http://www.hi.com/1/2/3/x.gif"    
-    @imagizer.imagize("This is some message http://is.gd/bSD5l but shortened").should include "http://www.hi.com/1/2/3/x.gif"       
+    @imagizer.imagize("This is some message http://bit.ly/bxjNbr but shortened", true).should include "http://www.hi.com/1/2/3/x.gif"    
+    @imagizer.imagize("This is some message http://bit.ly/bxjNbr but shortened", true).should include "http://www.hi.com/1/2/3/x.gif"    
+    @imagizer.imagize("This is some message http://is.gd/bSD5l but shortened", true).should include "http://www.hi.com/1/2/3/x.gif"       
   end                
   
        

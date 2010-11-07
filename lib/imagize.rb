@@ -28,7 +28,17 @@ module Imagize
     :plixi => {
       :url => "http://plixi.com/p/",
       :convert => "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://plixi.com/§ID§"
+    },
+    :twitgoo => {
+      :url => "http://twitgoo.com/",
+      :convert => "http://twitgoo.com/show/img/§ID§"
+    },
+    :imgly =>{
+      :url => "http://img.ly/",
+      :convert => "http://img.ly/show/full/§ID§"      
     }
+    
+    
 
   }       
   SHORTENERS = {
@@ -40,6 +50,9 @@ module Imagize
     },            
     :isgd =>{
       :url=>"http://is.gd/"
+    },
+    :twitter=>{
+      :url=>"http://t.co/"
     }
 
   }    
@@ -55,17 +68,20 @@ module Imagize
   
   class Imagizer
   
-    def imagize(message)   
+    def imagize(message, extract_shorteners=false)   
       tweet = message.clone
       images = Array.new
       
+      
       #find shortened content
-      SHORTENERS.each do |service, details|   
-        currentService = details[:url]      
-        tweet.scan /#{currentService}\w*/ do |current|        
-          tweet = tweet.sub (current, extract_shortener(current))
-        end                 
-      end     
+      if extract_shorteners
+        SHORTENERS.each do |service, details|   
+          currentService = details[:url]      
+          tweet.scan /#{currentService}\w*/ do |current|        
+            tweet = tweet.sub (current, extract_shortener(current))
+          end                 
+        end     
+      end
           
       #find image services
       URL_DEFINITIONS.each do |service, details|   
