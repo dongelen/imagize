@@ -17,10 +17,10 @@ module Imagize
       :url => "http://youtu.be/",    
       :convert => "http://img.youtube.com/vi/§ID§/0.jpg"      
     },            
-    :youtube_long => {
-      :url => "http://www.youtube.com/watch",
-      :convert => "http://img.youtube.com/vi/§ID§/0.jpg"
-    },
+    # :youtube_long => {
+    #   :url => "http://www.youtube.com/watch",
+    #   :convert => "http://img.youtube.com/vi/§ID§/0.jpg"
+    # }, 
     :tweetphoto => {
       :url => "http://tweetphoto.com/",
       :convert => "http://tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/§ID§"
@@ -67,6 +67,7 @@ module Imagize
   
   IMAGE_FINDERS = [JPG_FINDER, GIF_FINDER, PNG_FINDER]
   YOUTUBE_LONG_URL="http://www.youtube.com/watch"  
+  YOUTUBE_LONG_CONVERT_URL="http://img.youtube.com/vi/§ID§/0.jpg"
   
   class Imagizer
   
@@ -96,8 +97,12 @@ module Imagize
            
       # long youtube                
       tweet.scan /#{YOUTUBE_LONG_URL}\?v=\w*/ do |current|
-        code = current.sub(YOUTUBE_LONG_URL+"?v=", "")      
-        images <<  make_url (:youtube_long, code)      
+        p "Current is " + current
+        code = current.sub(YOUTUBE_LONG_URL+"?v=", "")    
+        p code
+        
+        images <<  make_youtube_url (code)      
+
       end   
       
       IMAGE_FINDERS.each do |finder|
@@ -122,5 +127,8 @@ module Imagize
       URL_DEFINITIONS[servicename][:convert].gsub "§ID§", code
     end       
     
+    def make_youtube_url (code)
+      YOUTUBE_LONG_CONVERT_URL.gsub "§ID§", code
+    end       
   end
 end

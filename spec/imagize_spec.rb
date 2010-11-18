@@ -29,14 +29,16 @@ describe "Imagize" do
   
   it "should recognize youtube" do
     urls= @imagizer.imagize("Hallo bnfgjfdgbfd http://youtu.be/B5IgPI9Dc7A?a\n Fiets")
-    urls.should include("http://img.youtube.com/vi/B5IgPI9Dc7A/0.jpg")       
+    urls[0].should == "http://img.youtube.com/vi/B5IgPI9Dc7A/0.jpg"
     
     urls = @imagizer.imagize("Hallo bnfgjfdgbfd http://www.youtube.com/watch?v=NPahxS10HkY Fiets")
-    urls.should include("http://img.youtube.com/vi/NPahxS10HkY/0.jpg")                               
+    urls[0].should == "http://img.youtube.com/vi/NPahxS10HkY/0.jpg"
     
     urls = @imagizer.imagize("Hallo bnfgjfdgbfd http://www.youtube.com/watch?v=ogZ9WXNNdIc Fiets")
-    urls.should include("http://img.youtube.com/vi/ogZ9WXNNdIc/0.jpg")                               
-    
+    urls[0].should == "http://img.youtube.com/vi/ogZ9WXNNdIc/0.jpg"
+       
+    urls = @imagizer.imagize("RT @bartligthart - V0.5 of the hezoo screencast! http://www.youtube.com/watch?v=XGV0rKvtEwc #mtnw #tutorial")
+    urls[0].should == "http://img.youtube.com/vi/XGV0rKvtEwc/0.jpg"
   end    
   
   it "should recognize tweetphoto" do
