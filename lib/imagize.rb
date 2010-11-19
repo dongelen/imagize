@@ -66,7 +66,7 @@ module Imagize
   PNG_FINDER = /#{IMAGE_URL}.png/       
   
   IMAGE_FINDERS = [JPG_FINDER, GIF_FINDER, PNG_FINDER]
-  YOUTUBE_LONG_URL="http://www.youtube.com/watch"  
+  YOUTUBE_LONG_URL="www.youtube.com/watch"  
   YOUTUBE_LONG_CONVERT_URL="http://img.youtube.com/vi/§ID§/0.jpg"
   
   class Imagizer

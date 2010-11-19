@@ -39,6 +39,13 @@ describe "Imagize" do
        
     urls = @imagizer.imagize("RT @bartligthart - V0.5 of the hezoo screencast! http://www.youtube.com/watch?v=XGV0rKvtEwc #mtnw #tutorial")
     urls[0].should == "http://img.youtube.com/vi/XGV0rKvtEwc/0.jpg"
+    
+
+    urls = @imagizer.imagize("Thumbs up! #NHLhogeschool #lipdub. #cmdlwd Echt goed gedaan hoor! www.youtube.com/watch?v=kX1Mc0e2fBA")
+    urls[0].should == "http://img.youtube.com/vi/kX1Mc0e2fBA/0.jpg"
+
+    
+    
   end    
   
   it "should recognize tweetphoto" do
