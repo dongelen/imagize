@@ -55,8 +55,13 @@ module Imagize
     },
     :twitter=>{
       :url=>"http://t.co/"
+    },
+    :lytsr=>{
+      :url=>"http://lyt.sr/"
+    },
+    :google=>{
+      :url=>"http://goo.gl/"
     }
-
   }    
   
   IMAGE_URL  = /http:\/\/[.\w]*\/[\/\w]*/

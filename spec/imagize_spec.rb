@@ -100,7 +100,10 @@ describe "Imagize" do
     @imagizer.extract_shortener("http://bit.ly/3EgFOY").should == "http://www.nu.nl"
     @imagizer.extract_shortener("http://bit.ly/cxGTkx").should == "http://www.facebook.com/XL1067/posts/116716535027115"    
     @imagizer.extract_shortener("http://j.mp/3EgFOY").should == "http://www.nu.nl"    
-    @imagizer.extract_shortener("http://is.gd/bSCVo").should == "http://www.nu.nl"    
+    @imagizer.extract_shortener("http://is.gd/bSCVo").should == "http://www.nu.nl"  
+    @imagizer.extract_shortener("http://goo.gl/VdHct").should == "http://www.nu.nl/"  
+    # @imagizer.extract_shortener("http://lyt.sr/k5aub").should == "http://www.nu.nl"  
+      
   end
   
   it "should extract  image in shortened url" do
