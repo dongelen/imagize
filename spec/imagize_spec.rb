@@ -59,6 +59,14 @@ describe "Imagize" do
     urls.should include("http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://plixi.com/44815082")       
   end  
   
+  it "should recognize lockerz" do
+    urls= @imagizer.imagize("Hallo bnfgjfdgbfd http://lockerz.com/s/104968649 Fiets")
+
+    urls.should include("http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://lockerz.com/s/104968649")       
+  end  
+  
+
+
   it "should recognize multiple images" do    
     urls= @imagizer.imagize("MitchBHavin @themdudez http://yfrog.com/16y0 @KarenWuvsYou http://twitpic.com/h5uhc - This is so cool:)! lol")
     urls.size.should ==2
@@ -103,6 +111,10 @@ describe "Imagize" do
     @imagizer.extract_shortener("http://is.gd/bSCVo").should == "http://www.nu.nl"  
     @imagizer.extract_shortener("http://goo.gl/VdHct").should == "http://www.nu.nl/"  
     # @imagizer.extract_shortener("http://lyt.sr/k5aub").should == "http://www.nu.nl"  
+    
+    
+    urls = @imagizer.imagize("bla http://goo.gl/qs5Z6 bla", true)
+    urls[0].should == "http://twitpic.com/show/large/38aduk"   
       
   end
   

@@ -26,9 +26,14 @@ module Imagize
       :convert => "http://tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/§ID§"
     },
     :plixi => {
+      :url => "http://lockerz.com/s/",
+      :convert => "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://lockerz.com/s/§ID§"
+    },
+    :lockerz => {
       :url => "http://plixi.com/p/",
       :convert => "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://plixi.com/§ID§"
     },
+
     :twitgoo => {
       :url => "http://twitgoo.com/",
       :convert => "http://twitgoo.com/show/img/§ID§"
