@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{imagize}
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Raymond van Dongelen"]
-  s.date = %q{2011-05-26}
+  s.date = %q{2011-08-28}
   s.description = %q{Retrieve images from a tweet}
   s.email = %q{dongelen@nhl.nl}
   s.extra_rdoc_files = [
