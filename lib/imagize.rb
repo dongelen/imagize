@@ -25,11 +25,11 @@ module Imagize
       :url => "http://tweetphoto.com/",
       :convert => "http://tweetphotoapi.com/api/TPAPI.svc/imagefromurl?size=big&url=http://tweetphoto.com/§ID§"
     },
-    :plixi => {
+    :lockerz => {
       :url => "http://lockerz.com/s/",
       :convert => "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://lockerz.com/s/§ID§"
     },
-    :lockerz => {
+    :plixi => {
       :url => "http://plixi.com/p/",
       :convert => "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=big&url=http://plixi.com/§ID§"
     },
@@ -45,8 +45,11 @@ module Imagize
     :mobyto => {
       :url => "http://moby.to/",
       :convert => "http://moby.to/§ID§:full"      
-    }        
-
+    },        
+    :instagram => {
+      :url => "http://instagr.am/p/",
+      :convert => "http://instagr.am/p/§ID§/media/?size=t"      
+    }
   }       
   SHORTENERS = {
     :bitly => {
