@@ -48,7 +48,7 @@ module Imagize
     },        
     :instagram => {
       :url => "http://instagr.am/p/",
-      :convert => "http://instagr.am/p/§ID§/media/?size=t"      
+      :convert => "http://instagr.am/p/§ID§/media/?size=l"      
     }
   }       
   SHORTENERS = {
