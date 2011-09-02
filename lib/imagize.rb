@@ -2,8 +2,7 @@ require "net/http"
 require "uri"
 
 module Imagize     
-
-                     
+                  
   URL_DEFINITIONS = {
     :twitpic => {
       :url => "http://twitpic.com/",
@@ -82,6 +81,8 @@ module Imagize
   YOUTUBE_LONG_URL="www.youtube.com/watch"  
   YOUTUBE_LONG_CONVERT_URL="http://img.youtube.com/vi/§ID§/0.jpg"
   
+  CLOUD_APP = "http://cl.ly"
+  
   class Imagizer
   
     def imagize(message, extract_shorteners=false)   
@@ -94,7 +95,7 @@ module Imagize
         SHORTENERS.each do |service, details|   
           currentService = details[:url]      
           tweet.scan /#{currentService}\w*/ do |current|        
-            tweet = tweet.sub (current, extract_shortener(current))
+            tweet = tweet.sub(current, extract_shortener(current))
           end                 
         end     
       end
@@ -104,9 +105,16 @@ module Imagize
         currentService = details[:url]                 
         tweet.scan /#{currentService}\w*/ do |current| 
           code = current.sub(currentService, "")      
-          images <<  make_url (service, code)
+          images <<  make_url(service, code)
         end                 
-      end          
+      end                                
+      
+      
+      #Find cl.ly 
+
+      #Find shorteners that use cl.ly
+      # Resolv.getaddress "dirk.si"      
+    
            
       # long youtube                
       tweet.scan /#{YOUTUBE_LONG_URL}\?v=\w*/ do |current|
@@ -114,7 +122,7 @@ module Imagize
         code = current.sub(YOUTUBE_LONG_URL+"?v=", "")    
         p code
         
-        images <<  make_youtube_url (code)      
+        images <<  make_youtube_url(code)      
 
       end   
       
