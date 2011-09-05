@@ -1,5 +1,8 @@
+require "rubygems"
 require "net/http"
 require "uri"
+require 'cloudapp_api' 
+
 
 module Imagize     
                   
@@ -81,7 +84,7 @@ module Imagize
   YOUTUBE_LONG_URL="www.youtube.com/watch"  
   YOUTUBE_LONG_CONVERT_URL="http://img.youtube.com/vi/§ID§/0.jpg"
   
-  CLOUD_APP = "http://cl.ly"
+  CLOUD_APP = "http://cl.ly/"
   
   class Imagizer
   
@@ -111,6 +114,15 @@ module Imagize
       
       
       #Find cl.ly 
+      tweet.scan /#{CLOUD_APP}\w*/ do |current|
+        p "Current is " + current
+        code = current.sub(CLOUD_APP, "")    
+        p code
+        
+        add_cloud_app_image images, code
+
+
+      end   
 
       #Find shorteners that use cl.ly
       # Resolv.getaddress "dirk.si"      
@@ -151,5 +163,12 @@ module Imagize
     def make_youtube_url (code)
       YOUTUBE_LONG_CONVERT_URL.gsub "§ID§", code
     end       
+    
+    def add_cloud_app_image(images, code)
+      drop = CloudApp::Drop.find code
+      if drop.image?
+        images << drop.remote_url
+      end
+    end
   end
 end

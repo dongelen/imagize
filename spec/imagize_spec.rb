@@ -1,6 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 include Imagize
-
 describe "Imagize" do      
   before (:all) do
     @imagizer = Imagize::Imagizer.new
@@ -139,5 +138,9 @@ describe "Imagize" do
     @imagizer.imagize("This is some message http://is.gd/bSD5l but shortened", true).should include "http://www.hi.com/1/2/3/x.gif"       
   end                
   
+  it "shoud recognize cloud app url" do 
+    @imagizer.imagize("This is some message http://cl.ly/2wr4").should include "http://f.cl.ly/items/7c7aea1395c3db0aee18/CloudApp%20Logo.png"
+    
+  end
        
 end
